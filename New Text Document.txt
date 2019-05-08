@@ -1,0 +1,58 @@
+the problem in this code is that even though we get all
+the prime factors of number n, some prime factors repeat themselves
+eg. 12 = 2 x 2 x 3;
+in this 2 divides the number n twice, but actually should divide only once.
+either we can store it in a set, which doesnt repeat a number, (but this would
+make it too complicated), or we can follow another method.
+
+
+#include<bits/stdc++.h>
+using namespace std;
+vector <int> prime;
+
+vector <int> spf(int n)
+{
+	vector <int> v;
+	for(int i=0;i<=n;i++)
+	v.push_back(i);
+	
+	for(int i=2;i*i<=n;i++)
+	{
+		if(v[i]==i)
+		{
+			for(int j=i*i;j<=n;j+=i)
+			{
+				if(v[j]==j)
+				v[j]=i;
+			}
+		}
+	}
+	
+	return v;
+}
+
+int etf(int n)
+{
+	int res = n;
+	while(n>1)
+	{
+		cout<<prime[n]<<"pf ";
+		res/=prime[n];
+		res*=(prime[n]-1);
+		n/=prime[n];
+	}
+	return res;
+}
+int main()
+{
+	int tc;
+	cin>>tc;
+	prime=spf(1000000);
+	while(tc--)
+	{
+		int n;
+		cin>>n;
+		cout<<etf(n)<<endl;
+	}
+	return 0;
+}
