@@ -34,7 +34,7 @@ void primeFactors(int n)
 		n/=2;
 	}
 	
-	for(int i=3;i*i<=n;i++)
+	for(int i=3;i*i<=n;i+=2)
 	{
 		while(n%i==0)
 		{
@@ -52,7 +52,7 @@ void primeFactorsOptimized(int n)
 	//use SPF to calculate smallest prime factor;
 	//run it once, store value using precomputation;
 	vector <int> prime=smallestPF(n);
-	cout<<"primeFactors\n";
+	cout<<"primeFactors ";
 	while(n>1)
 	{
 		cout<<prime[n]<<" ";
